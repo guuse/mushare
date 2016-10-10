@@ -13,6 +13,9 @@
 Route::get('/contact', 'PagesController@contact');
 Route::get('/', 'PagesController@home');
 
+Route::get('songs', 'songsController@index');
+Route::get('songs/{id}', 'songsController@show');
+
 
 Auth::routes();
 
