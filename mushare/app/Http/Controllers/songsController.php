@@ -14,18 +14,15 @@ class songsController extends Controller
 {
     public function index()
     {
-        $songs = Song::all();
         $genres = Genre::all();
+        $songs = Song::all();
 
-
-
-        return view('songs.index', compact('songs','genres','genre'));
+        return view('genres.index', compact('genres','songs'));
     }
     public function show($id)
     {
-        $song = Song::find($id);
-        $genre = DB::table('genres')->join('songs', 'genres_id', '=', 'songs.user_id')->select('genres.name')->get();
-        return view('songs.show', compact('song','genre'));
+        $genre = Genre::find($id);
+        return view('genres.show', compact('song'));
     }
 
 }
