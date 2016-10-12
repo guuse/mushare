@@ -16,6 +16,8 @@ Route::get('/', 'PagesController@home');
 Route::get('genres', 'songsController@index');
 Route::get('genres/{id}', 'songsController@show');
 
+Route::post('genres/{id}/notes', 'songsController@addSong');
+
 
 Auth::routes();
 

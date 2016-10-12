@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
@@ -80,8 +80,9 @@
         </div>
     </nav>
 
-    @yield('content')
-
+    <div class="container">
+        @yield('content')
+    </div>
     <!-- Scripts -->
     <script src="/js/app.js"></script>
 </body>

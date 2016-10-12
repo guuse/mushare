@@ -24,5 +24,20 @@ class songsController extends Controller
         $genre = Genre::find($id);
         return view('genres.show', compact('genre'));
     }
+    public function addSong(Request $request, $id)
+    {
+        $genre = Genre::find($id);
 
+        $song = new Song;
+
+        $song->name = $request->name;
+        $song->artist = $request->artist;
+        $song->link = $request->link;
+        $song->extra = $request->extra;
+        $song->genre_id = $request->genre_id;
+
+        $genre->songs()->save($song);
+
+        return back();
+    }
 }
