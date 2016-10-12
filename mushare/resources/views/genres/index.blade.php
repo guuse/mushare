@@ -10,7 +10,7 @@
 
         <div>
 
-                {{ $genre->name }}
+            <a href="/genres/{{ $genre->id }}">{{ $genre->name }}</a>
 
         </div>
 

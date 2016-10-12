@@ -13,8 +13,8 @@
 Route::get('/contact', 'PagesController@contact');
 Route::get('/', 'PagesController@home');
 
-Route::get('songs', 'songsController@index');
-Route::get('songs/{id}', 'songsController@show');
+Route::get('genres', 'songsController@index');
+Route::get('genres/{id}', 'songsController@show');
 
 
 Auth::routes();
