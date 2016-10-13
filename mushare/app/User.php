@@ -26,4 +26,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function likedPosts()
+    {
+        return $this->morphedByMany('App\Post', 'likeable')->whereDeletedAt(null);
+    }
+
+    public function dislikedPosts()
+    {
+        return $this->morphedByMany('App\Post', 'dislikeable')->whereDeletedAt(null);
+    }
 }

@@ -22,7 +22,7 @@ class songsController extends Controller
     public function show($id)
     {
         $genre = Genre::find($id);
-        return view('genres.show', compact('genre'));
+        return view('genres.show', compact('genre','likes'));
     }
     public function addSong(Request $request, $id)
     {

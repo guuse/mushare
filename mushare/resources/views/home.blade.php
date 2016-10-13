@@ -8,7 +8,7 @@
                 <div class="panel-heading">Homepage</div>
 
                 <div class="panel-body">
-                    Welcome to Mushare!
+
                 </div>
 
 

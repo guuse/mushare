@@ -9,16 +9,16 @@
 
               <h1>{{ $song->name }}</h1>
                 <ul class="list-group">
-                    <li class="list-group-item">{{ $song-> artist}}</li>
+
+                    <li class="list-group-item"> Artiest : {{ $song-> artist}}</li>
                     <li class="list-group-item">{{ $song-> link}}</li>
                     <li class="list-group-item">{{ $song-> extra}}</li>
                     <li class="list-group-item">{{ $genre-> name }}</li>
+                    <li class="list-group-item>"> Likes : {{$likes = DB::table('likeables')->where('likeable_id', $song->id)->count()}} </li>
+                    <li class="list-group-item>"> Dislikes : {{$likes = DB::table('dislikeables')->where('dislikeable_id', $song->id)->count()}} </li>
+                    <button class="btn"><a href="{{ route('product.like', $song->id) }}">Like</a></button>
+                    <button class="btn"><a href="{{ route('product.dislike', $song->id) }}">Dislike</a></button>
                 </ul>
-
-
-
-
-
             @endforeach
 
 

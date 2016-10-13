@@ -13,11 +13,40 @@
 Route::get('/contact', 'PagesController@contact');
 Route::get('/', 'PagesController@home');
 
-Route::get('genres', 'songsController@index');
+Route::get('genres', [
+    'uses'=>'songsController@index',
+    'as'=>'genres',
+    'middleware'=>'auth'
+    ]);
+
 Route::get('genres/{id}', 'songsController@show');
 
-Route::post('genres/{id}/notes', 'songsController@addSong');
+Route::post('genres/{id}/notes',
+    [
+        'uses'=>'songsController@addSong'
+    ]);
 
+Route::get('product/like/{id}',
+    [
+        'as' => 'product.like',
+        'uses' => 'LikeController@likeProduct'
+    ]);
+Route::get('post/like/{id}',
+    [
+        'as' => 'post.like',
+        'uses' => 'LikeController@likePost'
+    ]);
+
+Route::get('product/dislike/{id}',
+    [
+        'as' => 'product.dislike',
+        'uses' => 'DislikeController@dislikeProduct'
+    ]);
+Route::get('post/dislike/{id}',
+    [
+        'as' => 'post.dislike',
+        'uses' => 'DislikeController@dislikePost'
+    ]);
 
 Auth::routes();
 
