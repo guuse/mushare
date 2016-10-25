@@ -25,7 +25,7 @@ class DislikeController extends Controller
 
     public function handledisLike($type, $id)
     {
-        $existing_dislike = Dislike::withTrashed()->wheredisLikeableType($type)->wheredisLikeableId($id)->whereUserId(Auth::id())->first();
+        $existing_dislike = Dislike::withTrashed()->wheredislikeableType($type)->wheredisLikeableId($id)->whereUserId(Auth::id())->first();
 
         if (is_null($existing_dislike)) {
             Dislike::create([

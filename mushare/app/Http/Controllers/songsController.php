@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Song;
 use App\Genre;
+use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -22,7 +23,8 @@ class songsController extends Controller
     public function show($id)
     {
         $genre = Genre::find($id);
-        return view('genres.show', compact('genre','likes'));
+        $user = User::find($id);
+        return view('genres.show', compact('genre','likes','user'));
     }
     public function addSong(Request $request, $id)
     {
@@ -35,6 +37,7 @@ class songsController extends Controller
         $song->link = $request->link;
         $song->extra = $request->extra;
         $song->genre_id = $request->genre_id;
+        $song->users_id = $request->users_id;
 
         $genre->songs()->save($song);
 
