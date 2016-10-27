@@ -20,7 +20,7 @@ class PagesController extends Controller
             return redirect('home');
         }
         else{
-            $newest = $user = DB::table('songs')->orderBy('created_at', 'desc')->first();
+            $newest = DB::table('songs')->orderBy('created_at', 'desc')->first();
             return view('welcome', compact('newest'));
         }
     }

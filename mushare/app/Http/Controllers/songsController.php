@@ -8,6 +8,7 @@ use DB;
 use App\Song;
 use App\Genre;
 use App\User;
+use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -54,5 +55,11 @@ class songsController extends Controller
     {
         $song ->update($request->all());
         return back();
+    }
+    public function mySongs ()
+    {
+        $user = User::find();
+        $mysongs = DB::table('songs')->where('users_id', '=',Auth::user()->id)->get();
+        return view('profile.mysongs', compact('userid', compact('mysongs','user')));
     }
 }

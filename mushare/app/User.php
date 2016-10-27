@@ -36,4 +36,9 @@ class User extends Authenticatable
     {
         return $this->morphedByMany('App\Post', 'dislikeable')->whereDeletedAt(null);
     }
+
+    public function song()
+    {
+        return $this->hasMany(Song::class);
+    }
 }

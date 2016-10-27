@@ -62,6 +62,7 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li>
+                                    <a href=" mysongs/{{Auth::user()->id }}"> My songs</a>
                                     <a href="{{ url('/logout') }}"
                                         onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">

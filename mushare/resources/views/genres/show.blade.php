@@ -30,6 +30,7 @@
                     <li class="list-group-item>"> Dislikes : {{$dislikes = DB::table('dislikeables')->where('dislikeable_id', $song->id)->count()}} </li>
                     <button class="btn"><a href="{{ route('product.like', $song->id) }}">Like</a></button>
                     <button class="btn"><a href="{{ route('product.dislike', $song->id) }}">Dislike</a></button>
+                    <li class="list-group-item">Uploaded by : {{$user->name}}</li>
                 </ul>
 
                 {{--<div class="onoffswitch">--}}

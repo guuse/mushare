@@ -55,7 +55,10 @@ Route::patch('/songs/{song}',
     [
         'uses' => 'songsController@update'
     ]);
-
+Route::get('/mysongs',
+    [
+        'uses' => 'songsController@mySongs'
+    ]);
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
