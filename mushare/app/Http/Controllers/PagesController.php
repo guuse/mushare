@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,8 @@ class PagesController extends Controller
             return redirect('home');
         }
         else{
-            return view('welcome');
+            $newest = $user = DB::table('songs')->orderBy('created_at', 'desc')->first();
+            return view('welcome', compact('newest'));
         }
     }
 }

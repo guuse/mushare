@@ -22,9 +22,10 @@ class songsController extends Controller
     }
     public function show($id)
     {
+
         $genre = Genre::find($id);
         $user = User::find($id);
-        return view('genres.show', compact('genre','likes','user'));
+        return view('genres.show', compact('genre','likes','user','link'));
     }
     public function addSong(Request $request, $id)
     {
@@ -41,6 +42,17 @@ class songsController extends Controller
 
         $genre->songs()->save($song);
 
+        return back();
+    }
+
+    public function editSong(Song $song)
+    {
+        return view('songs.edit', compact('song'));
+    }
+
+    public function update(Request $request, Song $song)
+    {
+        $song ->update($request->all());
         return back();
     }
 }

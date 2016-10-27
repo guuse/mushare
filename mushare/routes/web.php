@@ -47,6 +47,14 @@ Route::get('post/dislike/{id}',
         'as' => 'post.dislike',
         'uses' => 'DislikeController@dislikePost'
     ]);
+Route::get('/songs/{song}/edit',
+    [
+        'uses' => 'songsController@editSong'
+    ]);
+Route::patch('/songs/{song}',
+    [
+        'uses' => 'songsController@update'
+    ]);
 
 Auth::routes();
 

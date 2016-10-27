@@ -10,7 +10,7 @@
 
         <div>
 
-            <a href="/genres/{{ $genre->id }}">{{ $genre->name }}</a>
+            <h3><a href="/genres/{{ $genre->id }}">{{ $genre->name }}</a></h3>
 
         </div>
 

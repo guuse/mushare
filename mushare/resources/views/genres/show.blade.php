@@ -3,30 +3,45 @@
 @section('content')
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
+            <h1> {{ $genre-> name }} </h1>
             @foreach($genre->songs as $song)
 
 
-
-              <h1>{{ $song->name }}</h1>
                 <ul class="list-group">
+                    <h3> {{ $song->name }}</h3>
+                    <h5> {{ $song-> artist}}</h5>
+                    @if ($song->extra)
+                        <h5>{{ $song-> extra}}</h5>
+                    @endif
+                    <h5>Uploaded by : {{$user->name}}</h5>
 
-                    <li class="list-group-item"> Artiest : {{ $song-> artist}}</li>
-                    <li class="list-group-item">{{ $song-> link}}</li>
-                    <li class="list-group-item">{{ $song-> extra}}</li>
-                    <li class="list-group-item">{{ $genre-> name }}</li>
+                    <h4 style="font-size: 0px">{{ $link = $song->link }}</h4>
+
+                    <?php
+                    $embed = Embed::make($link)->parseUrl();
+                    if ($embed) {
+                        $embed->setAttribute(['width' => 600]);
+                        echo $embed->getHtml();
+                    }
+                    ?>
+
+
                     <li class="list-group-item>"> Likes : {{$likes = DB::table('likeables')->where('likeable_id', $song->id)->count()}} </li>
-                    <li class="list-group-item>"> Dislikes : {{$likes = DB::table('dislikeables')->where('dislikeable_id', $song->id)->count()}} </li>
+                    <li class="list-group-item>"> Dislikes : {{$dislikes = DB::table('dislikeables')->where('dislikeable_id', $song->id)->count()}} </li>
                     <button class="btn"><a href="{{ route('product.like', $song->id) }}">Like</a></button>
                     <button class="btn"><a href="{{ route('product.dislike', $song->id) }}">Dislike</a></button>
                 </ul>
 
-                <div class="onoffswitch">
-                        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>
-                        <label class="onoffswitch-label" for="myonoffswitch">
-                            <span class="onoffswitch-inner"></span>
-                            <span class="onoffswitch-switch"></span>
-                        </label>
-                </div>
+                {{--<div class="onoffswitch">--}}
+                    {{--<form method="post" action="">--}}
+                        {{--<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" checked>--}}
+                        {{--<label class="onoffswitch-label" for="myonoffswitch">--}}
+                            {{--<span class="onoffswitch-inner"></span>--}}
+                            {{--<span class="onoffswitch-switch"></span>--}}
+                        {{--</label>--}}
+                        {{--<input type="submit">--}}
+                    {{--</form>--}}
+                {{--</div>--}}
 
             @endforeach
 
