@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','admin'
     ];
 
     /**
@@ -40,5 +40,10 @@ class User extends Authenticatable
     public function song()
     {
         return $this->hasMany(Song::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->admin;
     }
 }

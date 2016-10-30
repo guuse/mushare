@@ -21,15 +21,19 @@ class songsController extends Controller
 
         return view('genres.index', compact('genres','songs'));
     }
-    public function show($id)
+    public function show(Genre $genre)
     {
-
-        $genre = Genre::find($id);
-        $user = User::find($id);
-        return view('genres.show', compact('genre','likes','user','link'));
+        $genre->load('songs.users');
+        return view('genres.show', compact('genre','likes','link'));
     }
     public function addSong(Request $request, $id)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'artist' => 'required',
+            'link' => 'required'
+        ]);
+
         $genre = Genre::find($id);
 
         $song = new Song;
@@ -40,8 +44,9 @@ class songsController extends Controller
         $song->extra = $request->extra;
         $song->genre_id = $request->genre_id;
         $song->users_id = $request->users_id;
+        $song->user_id = $request->user_id;
 
-        $genre->songs()->save($song);
+        save($genre);
 
         return back();
     }
@@ -54,12 +59,11 @@ class songsController extends Controller
     public function update(Request $request, Song $song)
     {
         $song ->update($request->all());
-        return back();
+        return redirect()->route('profile', ['user'=>Auth::User()->id]);
     }
-    public function mySongs ()
+    public function mySongs (User $user)
     {
-        $user = User::find();
-        $mysongs = DB::table('songs')->where('users_id', '=',Auth::user()->id)->get();
-        return view('profile.mysongs', compact('userid', compact('mysongs','user')));
+        $user ->load('song');
+        return view('profile.mysongs', compact('user'));
     }
 }

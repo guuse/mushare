@@ -2,8 +2,7 @@
 
 @section('content')
 
-    {{$mysongs = DB::table('songs')->where('users_id', '=',Auth::user()->id)->get()}}
-    @foreach($user->songs as $mysongs)
+    @foreach($user->song as $mysongs)
     <ul class="list-group">
         <h3> {{ $mysongs-> name }}</h3>
         <h5> {{ $mysongs-> artist}}</h5>
@@ -21,8 +20,12 @@
         }
         ?>
 
+        <a href="{{route('edit', ['song'=>$mysongs->id])}}">Edit this song</a>
+
+
 
         <h5> Likes : {{$likes = DB::table('likeables')->where('likeable_id', $mysongs->id)->count()}} | Dislikes : {{$dislikes = DB::table('dislikeables')->where('dislikeable_id', $mysongs->id)->count()}} </h5>
     </ul>
+    @endforeach
 @stop
 

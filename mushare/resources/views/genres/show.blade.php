@@ -13,7 +13,7 @@
                     @if ($song->extra)
                         <h5>{{ $song-> extra}}</h5>
                     @endif
-                    <h5>Uploaded by : {{$user->name}}</h5>
+                    <h5>Uploaded by : {{$song->users->name}}</h5>
 
                     <h4 style="font-size: 0px">{{ $link = $song->link }}</h4>
 
@@ -30,7 +30,6 @@
                     <li class="list-group-item>"> Dislikes : {{$dislikes = DB::table('dislikeables')->where('dislikeable_id', $song->id)->count()}} </li>
                     <button class="btn"><a href="{{ route('product.like', $song->id) }}">Like</a></button>
                     <button class="btn"><a href="{{ route('product.dislike', $song->id) }}">Dislike</a></button>
-                    <li class="list-group-item">Uploaded by : {{$user->name}}</li>
                 </ul>
 
                 {{--<div class="onoffswitch">--}}
@@ -51,13 +50,22 @@
                 <form method="POST" action="/genres/{{ $genre->id }}/notes">
                     <input type="hidden" name="_token" value="{!! csrf_token() !!}">
                     <input type="hidden" name="genre_id" value="{{ $genre -> id }}">
-                    <input type="hidden" name="users_id" value="{{ $user -> id }}">
-                    Name: <input type="text" name="name"><br>
-                    Artist: <input type="text" name="artist"><br>
-                    Paste a youtube link: <input type="text" name="link"><br>
-                    Extra information: <input type="text" name="extra"><br>
+                    <input type="hidden" name="users_id" value="{{ Auth::user()->id }}">
+                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+
+                    Name: <input type="text" name="name" value="{{old('name')}}"><br>
+                    Artist: <input type="text" name="artist" value="{{old('artist')}}"><br>
+                    Paste a youtube link: <input type="link" name="link" value="{{old('link')}}"><br>
+                    Extra information: <input type="text" name="extra" value="{{old('extra')}}"><br>
                     <button type="submit" class="btn"> Add song</button>
                 </form>
+            @if(count($errors))
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
+            @endif
         </div>
     </div>
 

@@ -11,7 +11,9 @@
     <title>Mushare</title>
 
     <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    <link href="../../../public/css/bootstrap-switch.css" rel="stylesheet">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <!-- Scripts -->
     <script>
@@ -19,6 +21,7 @@
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+    <script src="../../../public/js/bootstrap-switch.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-default navbar-static-top">
@@ -62,7 +65,7 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href=" mysongs/{{Auth::user()->id }}"> My songs</a>
+                                    <a href=" {{ route('profile', ['user'=>Auth::User()->id])  }}"> My songs</a>
                                     <a href="{{ url('/logout') }}"
                                         onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
@@ -75,7 +78,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li><a href="{{ url('/contact') }}">Contact</a></li>
+                        <li><a href="{{ url('/admin') }}">Admin</a></li>
                     @endif
                 </ul>
             </div>
